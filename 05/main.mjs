@@ -2,9 +2,12 @@ import { readFileLines } from "../lib/readFile.mjs";
 
 const inputLines = readFileLines('./input.txt');
 
+// PART 2 difference
+const INCLUDE_DIAGONALS = true;
+
 (function main() {
   console.log('Part 5')
-  // Extract data, ignoring 2d lines
+  // Extract data
   const ventLines = convertInputToData(inputLines)
   console.log(ventLines);
 
@@ -16,6 +19,7 @@ const inputLines = readFileLines('./input.txt');
   console.log({total})
 
   // Part 1 winning score: 8622
+  // Part 2 winning score: 22037
 })();
 
 
@@ -62,8 +66,10 @@ function createVentLine(inputLine) {
   const diffY = y2 - y1;
 
   // For part 1
-  // const isDiagonal = diffX !== 0 && diffY !== 0
-  // if(isDiagonal) return null;
+  if(!INCLUDE_DIAGONALS) {
+    const isDiagonal = diffX !== 0 && diffY !== 0
+    if(isDiagonal) return null;
+  }
 
   const ventLine = {
     start: {
